@@ -58,7 +58,7 @@ public class EmpleadosController implements ActionListener,MouseListener{
                        
                     while(rstEmpleados.next())
                     {
-                     TablaModelo.addRow(new Object[]{rstEmpleados.getInt("idEmpleado"),rstEmpleados.getString("Apellidos"),rstEmpleados.getString("Nombre"),rstEmpleados.getString("Telefono")});  
+                     TablaModelo.addRow(new Object[]{rstEmpleados.getInt("Codigo"),rstEmpleados.getString("Apellidos"),rstEmpleados.getString("Nombre"),rstEmpleados.getString("Telefono")});  
                     }  
                     }
                     catch(SQLException e)
@@ -79,13 +79,19 @@ public class EmpleadosController implements ActionListener,MouseListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.VistaEmpleados.btn_Editar)
         {
-       this.ModeloEmpleado.Actualizar(this.VistaEmpleados.txtCodigo.getText(),
+       this.ModeloEmpleado.Actualizar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
                this.VistaEmpleados.txtApellidos.getText(),
                this.VistaEmpleados.txtNombre.getText(),
                this.VistaEmpleados.txtTelefono.getText());
+       
+     this.VistaEmpleados.txtCodigo.setText("");
+               this.VistaEmpleados.txtApellidos.setText("");
+               this.VistaEmpleados.txtNombre.setText("");
+               this.VistaEmpleados.txtTelefono.setText("");
+        }
         }
         
-    }
+    
     
 
     @Override
