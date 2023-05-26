@@ -38,7 +38,7 @@ public class EmpleadosController implements ActionListener,MouseListener{
       /*REALIZAR LA CONEXION*/
             
             //Limpiar la tabla Vista Empleados
-                DefaultTableModel TablaModelo = new DefaultTableModel();
+             /*  DefaultTableModel TablaModelo = new DefaultTableModel();
                 TablaModelo.setRowCount(0);
                 TablaModelo.setColumnCount(0);
                 this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
@@ -51,80 +51,97 @@ public class EmpleadosController implements ActionListener,MouseListener{
                     
       /* LEVANTAR EL MODELO Y LOGRAR RECORRER EL RESULTSET*/
         //Captar el resultado que viene del Modelo desde el método LISTARDATOS
-                ResultSet rstEmpleados =  this.ModeloEmpleado.ListarDatos();
-               
-                    try
-                    {
-                       
-                    while(rstEmpleados.next())
-                    {
-                     TablaModelo.addRow(new Object[]{rstEmpleados.getInt("Codigo"),rstEmpleados.getString("Apellidos"),rstEmpleados.getString("Nombre"),rstEmpleados.getString("Telefono")});  
-                    }  
-                    }
-                    catch(SQLException e)
-                    {
-                        JOptionPane.showMessageDialog(null, "Algo hizo falta..."+e);
-                    }
-                   
+                DefaultTableModel TablaModelo=  this.ModeloEmpleado.ListarDatos();
+               this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+                    
             //PASAR EL MODELO CREADO A LA TABLA DE LA VISTA EMPLEADOS        
                     this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
         
-        /*LEVANTAR LA VISTA EMPLEADOR*/
+        /*poner a escucha la tabla */
         this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
+         /*LEVANTAR LA VISTA EMPLEADOR*/
       this.VistaEmpleados.setLocationRelativeTo(null);
       this.VistaEmpleados.setVisible(true);
     }
 
-    @Override
+   @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.VistaEmpleados.btn_Editar)
         {
-       this.ModeloEmpleado.Actualizar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
-               this.VistaEmpleados.txtApellidos.getText(),
-               this.VistaEmpleados.txtNombre.getText(),
-               this.VistaEmpleados.txtTelefono.getText());
-       
-     this.VistaEmpleados.txtCodigo.setText("");
-               this.VistaEmpleados.txtApellidos.setText("");
-               this.VistaEmpleados.txtNombre.setText("");
-               this.VistaEmpleados.txtTelefono.setText("");
+            this.ModeloEmpleado.Actualizar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
+                this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
+
+            DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
+            this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
         }
+        if(e.getSource() == this.VistaEmpleados.btn_Agregar)
+        {
+            this.ModeloEmpleado.Guardar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
+                this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
+                            
+            DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
+            this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+            
+            this.VistaEmpleados.txtCodigo.setText("");
+            this.VistaEmpleados.txtApellidos.setText("");
+            this.VistaEmpleados.txtNombre.setText("");
+            this.VistaEmpleados.txtTelefono.setText("");
         }
-        
-    
-    
+        if(e.getSource() == this.VistaEmpleados.btnEliminar)
+        {
+            this.ModeloEmpleado.Eliminar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
+                this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
+            DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
+            this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+            
+            this.VistaEmpleados.txtCodigo.setText("");
+            this.VistaEmpleados.txtApellidos.setText("");
+            this.VistaEmpleados.txtNombre.setText("");
+            this.VistaEmpleados.txtTelefono.setText("");
+        }
+
+    }
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
         int fila;
-        if(arg0.getSource()==this.VistaEmpleados.jtbEmpleados){
-            fila=this.VistaEmpleados.jtbEmpleados.getSelectedRow();
+        if(arg0.getSource()==this.VistaEmpleados.jtbEmpleados)
+        {
+            fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
             this.VistaEmpleados.txtCodigo.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 0).toString());
-            this.VistaEmpleados.txtApellidos.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 1).toString());
-             this.VistaEmpleados.txtNombre.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 2).toString());
-              this.VistaEmpleados.txtTelefono.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 3).toString());
             
+            fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
+            this.VistaEmpleados.txtApellidos.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 1).toString());
+            
+            fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
+            this.VistaEmpleados.txtNombre.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 2).toString());
+            
+            fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
+            this.VistaEmpleados.txtTelefono.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 3).toString());
         }
     }
 
     @Override
     public void mousePressed(MouseEvent arg0) {
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent arg0) {
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
+        
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) {
+        
     }
 
-    
-    
- 
- 
 }
