@@ -23,8 +23,9 @@ public class main {
         frmPrincipal VistaPrincipal = new frmPrincipal();
         EmpleadosModel ModeloEmpleados = new EmpleadosModel();
         frmEmpleados VistaEmpleados = new frmEmpleados(VistaPrincipal,true);
+        frmBuscar  Buscar =new frmBuscar(VistaPrincipal,true);
         
-        EmpleadosController ControladorEmpleados = new EmpleadosController(VistaEmpleados,VistaPrincipal,ModeloEmpleados);
+        EmpleadosController ControladorEmpleados = new EmpleadosController(VistaEmpleados,VistaPrincipal,ModeloEmpleados,Buscar);
         
     }
     

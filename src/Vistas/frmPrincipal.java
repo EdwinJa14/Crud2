@@ -27,7 +27,36 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMb = new javax.swing.JMenuBar();
+        jM1 = new javax.swing.JMenu();
+        jM2 = new javax.swing.JMenu();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu3.setText("jMenu3");
+
+        jMenu4.setText("jMenu4");
+
+        jMenuItem3.setText("jMenuItem3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jM1.setText("Administrar Empleados");
+        jM1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jM1MouseClicked(evt);
+            }
+        });
+        jMb.add(jM1);
+
+        jM2.setText("Buscar Empleados");
+        jMb.add(jM2);
+
+        setJMenuBar(jMb);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +66,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jM1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jM1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jM1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +112,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenu jM1;
+    public javax.swing.JMenu jM2;
+    public static javax.swing.JMenuBar jMb;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,7 +20,7 @@ Connection conexion;
             String url = "jdbc:oracle:thin:@"+ nombre_servidor + ":" + numero_puerto + ":" + sid; 
             
             //NOMBRE DEL USUARIO Y CONTRASEÑA
-            String usuario="HA7";
+            String usuario="HA10";
             String password="Umg$2023";
             this.conexion = DriverManager.getConnection(url,usuario,password);
             //JOptionPane.showMessageDialog(null,"Conectado");

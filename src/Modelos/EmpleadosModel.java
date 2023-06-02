@@ -26,7 +26,7 @@ public DefaultTableModel ListarDatos()
         Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        result = sentencia.executeQuery("select * from Emplea2");
+        result = sentencia.executeQuery("select * from PERSONASS");
         
         
             while(result.next())
@@ -53,7 +53,7 @@ public void Actualizar(int codigo, String Apellidos, String Nombre, String telef
             Conexion nuevaConexion = new Conexion();
             MyConexion = nuevaConexion.Conectar();
             Statement sentencia = MyConexion.createStatement();
-            sentencia.executeQuery("Update emplea2 set apellidos ="+
+            sentencia.executeQuery("Update PERSONASs set apellidos ="+
                     "'"+Apellidos+"',nombre="+"'"+Nombre+"',telefono="+"'"+telefono+
                     "' where codigo="+"'"+codigo+"'");
         }
@@ -70,7 +70,7 @@ public void Guardar(int codigo, String Apellidos, String Nombres, String Telefon
             Conexion nuevaConexion = new Conexion();
             MyConexion = nuevaConexion.Conectar();
             Statement sentencia = MyConexion.createStatement();
-            sentencia.executeQuery("Insert into emplea2 values("+"'"+codigo+"',"+
+            sentencia.executeQuery("Insert into PERSONASS values("+"'"+codigo+"',"+
                     "'"+Apellidos+"',"+"'"+Nombres+"',"+"'"+Telefono+"')");
         }
         catch(SQLException ex)
@@ -94,5 +94,40 @@ public void Eliminar(int codigo, String Apellidos, String Nombres, String Telefo
             JOptionPane.showMessageDialog(null, "No se pudo eliminar..."+ex.getMessage());
         }  
 }
+public DefaultTableModel Consulta(String Consulta)
+{
+    DefaultTableModel TablaModelo = new DefaultTableModel();
+    TablaModelo.setRowCount(0);
+    TablaModelo.setColumnCount(0);
+    
+        TablaModelo.addColumn("idEmpleados");
+        TablaModelo.addColumn("Apellidos");
+        TablaModelo.addColumn("Nombres");
+        TablaModelo.addColumn("Telefono");
 
+
+    try
+    {
+        Conexion nuevaConexion = new Conexion();
+        MyConexion = nuevaConexion.Conectar();
+        Statement sentencia = MyConexion.createStatement();
+        result = sentencia.executeQuery(Consulta);
+        
+        
+            while(result.next())
+            {
+                TablaModelo.addRow(new Object[]{result.getInt("codigo"),
+                result.getString("apellidos"),
+                result.getString("nombre"),
+                result.getString("telefono")});
+            }
+        return TablaModelo;
+    }
+    
+    catch(SQLException e)
+    {
+        JOptionPane.showMessageDialog(null, "No se Pudo Listar Empleados...."+e.getMessage());
+    }
+    return TablaModelo;
+}
 }
