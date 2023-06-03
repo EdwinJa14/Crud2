@@ -27,44 +27,7 @@ public class EmpleadosController implements ActionListener,MouseListener{
         this.VistaPrincipal = VistaPrincipal;
         this.ModeloEmpleado = ModeloEmpleado;
         this.Buscar=Buscar;
-        
-        /*LEVANTAR LAS VISTAS*/
-      this.VistaPrincipal.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
-      this.VistaPrincipal.setVisible(true);
       
-      /*PONER A LA ESCUCHA LOS BOTONES*/
-    /*  this.VistaEmpleados.btn_Agregar.addActionListener(this);
-      this.VistaEmpleados.btn_Editar.addActionListener(this);
-      this.VistaEmpleados.btnEliminar.addActionListener(this);*/
-        
-      /*REALIZAR LA CONEXION*/
-            
-            //Limpiar la tabla Vista Empleados
-             /*  DefaultTableModel TablaModelo = new DefaultTableModel();
-                TablaModelo.setRowCount(0);
-                TablaModelo.setColumnCount(0);
-                this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
-      
-            //prepara el modelo de la tabla
-                    TablaModelo.addColumn("ID");
-                    TablaModelo.addColumn("APELLIDOS");
-                    TablaModelo.addColumn("NOMBRE");
-                    TablaModelo.addColumn("TELEFONO");
-                    
-      /* LEVANTAR EL MODELO Y LOGRAR RECORRER EL RESULTSET*/
-        //Captar el resultado que viene del Modelo desde el método LISTARDATOS
-             /*   DefaultTableModel TablaModelo=  this.ModeloEmpleado.ListarDatos();
-               this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);*/
-                    
-            //PASAR EL MODELO CREADO A LA TABLA DE LA VISTA EMPLEADOS        
-                    /*this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);*/
-        
-        /*poner a escucha la tabla */
-       /* this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
-         /*LEVANTAR LA VISTA EMPLEADOR*/
-    /*  this.VistaEmpleados.setLocationRelativeTo(null);
-      this.VistaEmpleados.setVisible(true);*/
-       /*  PONER A LA ESCUCHA LOS BOTONES*/
       this.VistaEmpleados.btn_Agregar.addActionListener(this);
       this.VistaEmpleados.btn_Editar.addActionListener(this);
       this.VistaEmpleados.btnEliminar.addActionListener(this);
@@ -74,11 +37,15 @@ public class EmpleadosController implements ActionListener,MouseListener{
             //PASAR EL MODELO CREADO A LA TABLA DE LA VISTA EMPLEADOS        
                     this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
         
-        /*poner a escucha la tabla */
-        this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
+        
+       this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
           this.VistaPrincipal.jM1.addMouseListener(this);
            this.VistaPrincipal.jM2.addMouseListener(this);
-           this.Buscar.btnEjecutar.addMouseListener(this);
+           this.Buscar.btnEjecutar.addActionListener(this);
+                /*LEVANTAR LA VISTA EMPLEADOR*/
+      this.VistaPrincipal.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
+      this.VistaPrincipal.setVisible(true); 
+           
     }
 
    @Override
@@ -121,12 +88,15 @@ public class EmpleadosController implements ActionListener,MouseListener{
             this.VistaEmpleados.txtTelefono.setText("");
         }
         if(e.getSource() == this.Buscar.btnEjecutar){
-           DefaultTableModel TablaModelo2 =this.ModeloEmpleado.Consulta(this.Buscar.txtConsulta.getText());
-           this.Buscar.jtTabla.setModel(TablaModelo2);
+           DefaultTableModel TablaModelo2 =this.ModeloEmpleado.ListConsulta(this.Buscar.txtConsulta.getText());
+           
+           this.Buscar.jtbConsulta.setModel(TablaModelo2);
             
             
             
         }
+        
+        
 
     }
 
@@ -152,12 +122,14 @@ public class EmpleadosController implements ActionListener,MouseListener{
         
       this.VistaEmpleados.setLocationRelativeTo(null);
       this.VistaEmpleados.setVisible(true);
+      
     }
            if(arg0.getSource()==this.VistaPrincipal.jM2){
         /*LEVANTAR LA VISTA EMPLEADOR*/
         
       this.Buscar.setLocationRelativeTo(null);
       this.Buscar.setVisible(true);
+      
     }
             
         }

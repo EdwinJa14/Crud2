@@ -26,7 +26,7 @@ public DefaultTableModel ListarDatos()
         Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        result = sentencia.executeQuery("select * from PERSONASS");
+        result = sentencia.executeQuery("select * from EMPLEADOS ");
         
         
             while(result.next())
@@ -53,9 +53,9 @@ public void Actualizar(int codigo, String Apellidos, String Nombre, String telef
             Conexion nuevaConexion = new Conexion();
             MyConexion = nuevaConexion.Conectar();
             Statement sentencia = MyConexion.createStatement();
-            sentencia.executeQuery("Update PERSONASs set apellidos ="+
-                    "'"+Apellidos+"',nombre="+"'"+Nombre+"',telefono="+"'"+telefono+
-                    "' where codigo="+"'"+codigo+"'");
+            sentencia.executeQuery("Update EMPLEADOS set APELLIDOS="+
+                    "'"+Apellidos+"',NOMBRE="+"'"+Nombre+"',TELEFONO="+"'"+telefono+
+                    "' where CODIGO="+"'"+codigo+"'");
         }
         catch(SQLException ex)
         {
@@ -70,7 +70,7 @@ public void Guardar(int codigo, String Apellidos, String Nombres, String Telefon
             Conexion nuevaConexion = new Conexion();
             MyConexion = nuevaConexion.Conectar();
             Statement sentencia = MyConexion.createStatement();
-            sentencia.executeQuery("Insert into PERSONASS values("+"'"+codigo+"',"+
+            sentencia.executeQuery("Insert into EMPLEADOS values("+"'"+codigo+"',"+
                     "'"+Apellidos+"',"+"'"+Nombres+"',"+"'"+Telefono+"')");
         }
         catch(SQLException ex)
@@ -86,7 +86,7 @@ public void Eliminar(int codigo, String Apellidos, String Nombres, String Telefo
             Conexion nuevaConexion = new Conexion();
             MyConexion = nuevaConexion.Conectar();
             Statement sentencia = MyConexion.createStatement();
-            sentencia.executeQuery("delete from emplea2 where codigo="+"'"+codigo+"'");
+            sentencia.executeQuery("delete from EMPLEADOS where codigo="+"'"+codigo+"'");
 
         }
             catch(SQLException ex)
@@ -94,16 +94,18 @@ public void Eliminar(int codigo, String Apellidos, String Nombres, String Telefo
             JOptionPane.showMessageDialog(null, "No se pudo eliminar..."+ex.getMessage());
         }  
 }
-public DefaultTableModel Consulta(String Consulta)
+
+public DefaultTableModel ListConsulta(String consulta)
 {
     DefaultTableModel TablaModelo = new DefaultTableModel();
     TablaModelo.setRowCount(0);
     TablaModelo.setColumnCount(0);
     
-        TablaModelo.addColumn("idEmpleados");
+        
         TablaModelo.addColumn("Apellidos");
         TablaModelo.addColumn("Nombres");
         TablaModelo.addColumn("Telefono");
+        TablaModelo.addColumn("idEmpleado");
 
 
     try
@@ -111,11 +113,12 @@ public DefaultTableModel Consulta(String Consulta)
         Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        result = sentencia.executeQuery(Consulta);
+        result = sentencia.executeQuery(consulta);
         
         
             while(result.next())
             {
+                
                 TablaModelo.addRow(new Object[]{result.getInt("codigo"),
                 result.getString("apellidos"),
                 result.getString("nombre"),
@@ -130,4 +133,5 @@ public DefaultTableModel Consulta(String Consulta)
     }
     return TablaModelo;
 }
+
 }
